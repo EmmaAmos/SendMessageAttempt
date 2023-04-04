@@ -1,0 +1,50 @@
+<h1>List of Employees</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th class="hidden">ID</th>
+      <th>Name</th>
+      <th>Designation</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Age</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let employee of employees">
+    <td  class="hidden">{{employee._id}}</td>
+    <td>{{employee.name}}</td>
+    <td>{{employee.designation}}</td>
+    <td>{{employee.email}}</td>
+    <td>{{employee.phone}}</td>
+    <td>{{employee.age}}</td>
+    <td><button type="button" (click)="removeEmployee(employee._id)">Delete</button></td>
+  </tbody>
+</table>
+
+<br><hr><br>
+
+<form (ngSubmit)="addNewEmployee(formData)">
+  <label for="name">Name:</label><br>
+  <input type="text" id="name" name="name" [(ngModel)]="formData.name">
+  <br>
+  <label for="designation">Designation:</label>
+  <br>
+  <input type="text" id="designation" name="designation" [(ngModel)]="formData.designation">
+  <br>
+  <label for="email">Email:</label>
+  <br>
+  <input type="text" id="email" name="email" [(ngModel)]="formData.email">
+  <br>
+  <label for="phone">Phone:</label>
+  <br>
+  <input type="text" id="phone" name="phone" [(ngModel)]="formData.phone">
+  <br>
+  <label for="age">Age:</label>
+  <br>
+  <input type="text" id="age" name="age" [(ngModel)]="formData.age">
+  <br><br>
+  <input type="submit" value="Submit">
+</form>
+
+<router-outlet></router-outlet>

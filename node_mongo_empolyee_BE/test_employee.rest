@@ -1,0 +1,46 @@
+GET http://localhost:3000/api/employee/ HTTP/1.1
+
+###
+
+POST http://localhost:3000/api/employee/show HTTP/1.1
+content-type: application/json
+
+{
+    "employeeID": "6429d90b164cf58f1fb2ae8e"
+}
+
+###
+
+POST http://localhost:3000/api/employee/store HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Jill Smith",
+    "designation": "North Store",
+    "email": "js@here.com",
+    "phone": "123-456-7890",
+    "age": 33
+}
+
+###
+
+POST http://localhost:3000/api/employee/update HTTP/1.1
+content-type: application/json
+
+{
+    "employeeID": "6429d95b164cf58f1fb2ae94",
+    "name": "Jill Smith",
+    "designation": "North Store",
+    "email": "js@here.com",
+    "phone": "123-456-7891",
+    "age": 33
+}
+
+###
+
+POST http://localhost:3000/api/employee/destory HTTP/1.1
+content-type: application/json
+
+{
+    "employeeID": "6429d90b164cf58f1fb2ae8e"
+}
