@@ -10,6 +10,8 @@ export class AppComponent {
   title = 'employees';
   employees: any[];
   formData: any = {};
+  selectedEmployee: any = null;   //Added foe Update 
+
   constructor (private http:HttpClient) {}
 
   ngOnInit() {
@@ -39,4 +41,32 @@ export class AppComponent {
       this.employees = this.employees[0]
     })
   }
+
+  //Added foe Update
+  updateEmployee() {
+    const updateData = {
+      "employeeID": this.selectedEmployee._id,
+      "name": this.selectedEmployee.name,
+      "designation": this.selectedEmployee.designation,
+      "email": this.selectedEmployee.email,
+      "phone": this.selectedEmployee.phone,
+      "age": this.selectedEmployee.age
+    };
+    this.http.put(`http://localhost:3000/api/employee/${this.selectedEmployee._id}`, updateData).subscribe(res => {
+      console.log(res);
+      this.getEmployees(); // refresh employee list after update
+      this.selectedEmployee = null; // reset the selected employee
+    }, err => {
+      console.log(err);
+    })
+  }
+
+  onSelect(employee: any) {
+    this.selectedEmployee = employee;
+  }
+
+  cancelUpdate(){
+    this.selectedEmployee = null;
+  }
+
 }
