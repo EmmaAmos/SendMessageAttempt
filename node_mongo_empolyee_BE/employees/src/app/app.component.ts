@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,7 +11,7 @@ export class AppComponent {
   title = 'employees';
   employees: any[];
   formData: any = {};
-  selectedEmployee: any = null;   //Added foe Update 
+  selectedEmployee: any;   //Added foe Update 
 
   constructor (private http:HttpClient) {}
 
@@ -42,23 +43,22 @@ export class AppComponent {
     })
   }
 
-  //Added foe Update
-  updateEmployee() {
-    const updateData = {
-      "employeeID": this.selectedEmployee._id,
+  //Added for Update
+  updateEmployee(id: string) {
+    const putData = {
+      "employeeID": id,
       "name": this.selectedEmployee.name,
       "designation": this.selectedEmployee.designation,
       "email": this.selectedEmployee.email,
       "phone": this.selectedEmployee.phone,
       "age": this.selectedEmployee.age
-    };
-    this.http.put(`http://localhost:3000/api/employee/${this.selectedEmployee._id}`, updateData).subscribe(res => {
+    }
+    this.http.post('http://localhost:3000/api/employee/update', putData).subscribe(res => {
       console.log(res);
-      this.getEmployees(); // refresh employee list after update
-      this.selectedEmployee = null; // reset the selected employee
+      this.selectedEmployee = null; // Close the edit form
     }, err => {
-      console.log(err);
-    })
+      console.log(err)
+    });
   }
 
   onSelect(employee: any) {

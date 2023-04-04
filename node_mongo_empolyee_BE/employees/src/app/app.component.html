@@ -13,7 +13,7 @@
 
   <tbody (click)="onSelect(employee)" *ngFor="let employee of employees" >
     <td  class="hidden">{{employee._id}}</td>
-    <td><img class="icon" src="../app/assests/images/VirtualBunnyStudio.png" alt="employeeImage"> {{employee.name}}</td>
+    <td> {{employee.name}}</td>
     <td>{{employee.designation}}</td>
     <td>{{employee.email}}</td>
     <td>{{employee.phone}}</td>
@@ -22,9 +22,10 @@
   </tbody>
 </table>
 
+<!--If onSelect is ative-->
 <div *ngIf="selectedEmployee">
   <h1>Edit Employee</h1>
-  <form (ngSubmit)="updateEmployee()">
+  <form (ngSubmit)="updateEmployee(selectedEmployee._id)">
     <label for="name">Name:</label><br>
     <input type="text" id="name" name="name" [(ngModel)]="selectedEmployee.name">
     <br>
