@@ -1,5 +1,4 @@
 <h1>List of Employees</h1>
-
 <table>
   <thead>
     <tr>
@@ -12,10 +11,9 @@
     </tr>
   </thead>
 
-  <h1>Add New Employee</h1>
   <tbody *ngFor="let employee of employees" >
     <td  class="hidden">{{employee._id}}</td>
-    <td><img class="icon" src="../app/assets/images/741-7413047_employee-png-grey-transparent-png.png" alt="employeeImage"> {{employee.name}}</td>
+    <td><img class="icon" src="../app/assests/images/VirtualBunnyStudio.png" alt="employeeImage"> {{employee.name}}</td>
     <td>{{employee.designation}}</td>
     <td>{{employee.email}}</td>
     <td>{{employee.phone}}</td>
@@ -25,7 +23,7 @@
 </table>
 
 <br><hr><br>
-
+<h1>Add New Employee</h1>
 <form (ngSubmit)="addNewEmployee(formData)">
   <label for="name">Name:</label><br>
   <input type="text" id="name" name="name" [(ngModel)]="formData.name">
