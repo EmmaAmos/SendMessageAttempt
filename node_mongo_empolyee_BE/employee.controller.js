@@ -1,5 +1,6 @@
 const { response } = require('express')
 const Employee = require('./employee.model')
+const nodemailer = require('nodemailer');
 
 //Show list of employees
 const index = (req, res, next) => {
@@ -95,6 +96,30 @@ const destory = (req, res, next) => {
         })
     })
 }
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'elovestodraw@gmail.com',
+      pass: 'letmeingmail1'
+    }
+  });
+
+  const mailOptions = {
+    from: 'elovestodraw@gmail.com',
+    to: 'elovestodraw@gmail.com',
+    subject: 'Test email',
+    text: 'This is a test email from Nodemailer'
+  }; 
+
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });  
+  
 
 module.exports = {
     index, show, store, update, destory
