@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {nodemailer} from "nodemailer";
 
 
 @Component({
@@ -68,5 +69,36 @@ export class AppComponent {
   cancelUpdate(){
     this.selectedEmployee = null;
   }
+
+
+
+
+async function sendEmail(to: string, subject: string, message: string) {
+  const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
+    auth: {
+      user: "your_email@gmail.com",
+      pass: "your_email_password",
+    },
+  });
+
+  const mailOptions = {
+    from: "your_email@gmail.com",
+    to: to,
+    subject: subject,
+    text: message,
+  };
+
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log(`Message sent: ${info.messageId}`);
+  } catch (error) {
+    console.error(`Error occurred: ${error}`);
+  }
+}
+
+
 
 }
