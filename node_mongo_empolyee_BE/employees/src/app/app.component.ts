@@ -70,35 +70,32 @@ export class AppComponent {
     this.selectedEmployee = null;
   }
 
+  // Assigning sendEmail function to a class method
+  async sendEmail(to: string, subject: string, message: string) {
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 587,
+      secure: false,
+      auth: {
+        user: "elovestodraw@gmail.com",
+        pass: "###",
+      },
+    });
 
+    const mailOptions = {
+      from: "elovestodraw@gmail.com",
+      to: to,
+      subject: subject,
+      text: message,
+    };
 
-
-async function sendEmail(to: string, subject: string, message: string) {
-  const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: false,
-    auth: {
-      user: "your_email@gmail.com",
-      pass: "your_email_password",
-    },
-  });
-
-  const mailOptions = {
-    from: "your_email@gmail.com",
-    to: to,
-    subject: subject,
-    text: message,
-  };
-
-  try {
-    const info = await transporter.sendMail(mailOptions);
-    console.log(`Message sent: ${info.messageId}`);
-  } catch (error) {
-    console.error(`Error occurred: ${error}`);
+    try {
+      const info = await transporter.sendMail(mailOptions);
+      console.log(`Message sent: ${info.messageId}`);
+    } catch (error) {
+      console.error(`Error occurred: ${error}`);
+    }
   }
-}
-
 
 
 }
